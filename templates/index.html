@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Management</title>
+    <style>
+        body { font-family: Arial; margin: 30px; background-color: #f2f2f2; }
+        table { width: 90%; margin: auto; border-collapse: collapse; background: #fff; }
+        th, td { padding: 12px; border: 1px solid #ccc; text-align: center; }
+        th { font-weight: bold; }
+
+        .actions-block {
+            width: 90%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center; /* center horizontally */
+            gap: 20px; /* space between buttons */
+            padding: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            background: #007BFF;  /* blue */
+            color: white;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Employee Management System</h2>
+
+    <!-- Actions Block Above Table -->
+    <div class="actions-block">
+        <a href="/add" class="btn">➕ Add Employee</a>
+        <a href="/delete_all" class="btn" onclick="return confirm('Delete ALL employees?')">🗑️🗑️ Delete All</a>
+    </div>
+
+    <!-- Employee Table -->
+    <table>
+        <tr>
+            <th>ID</th><th>Name</th><th>Age</th><th>Department</th><th>Salary</th><th>Actions</th>
+        </tr>
+        {% for emp in employees %}
+        <tr>
+            <td>{{ emp[0] }}</td> <!-- actual DB ID -->
+            <td>{{ emp[1] }}</td>
+            <td>{{ emp[2] }}</td>
+            <td>{{ emp[3] }}</td>
+            <td>{{ emp[4] }}</td>
+            <td>
+                <a href="/update/{{ emp[0] }}" class="btn">✏ Update</a>
+                <a href="/delete/{{ emp[0] }}" class="btn" onclick="return confirm('Delete this employee?')">🗑️ Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
